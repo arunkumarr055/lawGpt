@@ -13,7 +13,8 @@ splitter = RecursiveCharacterTextSplitter(
 docs = splitter.split_documents(documents)
 
 embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+    model_name="nomic-ai/nomic-embed-text-v1",
+    model_kwargs={"trust_remote_code": True}
 )
 
 db = FAISS.from_documents(docs, embeddings)
