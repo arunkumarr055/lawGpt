@@ -32,14 +32,18 @@ if "memory" not in st.session_state:
 
 # ---------------- EMBEDDINGS ----------------
 embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+    model_name="nomic-ai/nomic-embed-text-v1",
+    model_kwargs={"trust_remote_code": True}
 )
 
 # ---------------- VECTOR DB ----------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "ipc_vector_db")
+
 db = FAISS.load_local(
-    "ipc_vector_db",
+    DB_PATH,
     embeddings,
-    allow_dangerous_deserialization=True
+    allow_dangerous_deserialization=True,
 )
 
 retriever = db.as_retriever(search_kwargs={"k": 4})
