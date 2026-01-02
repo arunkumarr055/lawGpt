@@ -1,0 +1,8 @@
+streamlit==1.32.2
+langchain==0.1.16
+langchain-community==0.0.32
+langchain-core==0.1.45
+faiss-cpu
+sentence-transformers
+langchain-groq
+pypdf
